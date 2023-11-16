@@ -1,4 +1,5 @@
 from sqlite.characters import *
+from sqlite.ranks import *
 
 def calling_info(calling):
     info = {
@@ -50,5 +51,20 @@ def new_character(user_id, char):
     if status:
         return "Character successfully added!"
     else:
-        return "There was an issue adding your character..."
+        return "You can only have one character created."
     
+def edit_char_name(user_id, old_name, new_name):
+    status = edit_name(user_id, old_name, new_name)
+    if status:
+        return "Name successfully changed."
+    else:
+        return "Could not find character."
+    
+def level_up_char(user_id, char_name):
+    (calling, rank) = get_char_rank(user_id, char_name)
+    (might, deft, grit, insight, aura, attack, hearts) = get_stats(calling, rank)
+    status = level_up(user_id, char_name, might, deft, grit, insight, aura, attack, hearts)
+    if status:
+        return f"{char_name} successfully leveled up from rank {rank} to rank {rank+1}!"
+    else:
+        return f"There was an error leveling up {char_name}..."

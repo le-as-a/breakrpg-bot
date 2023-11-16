@@ -23,6 +23,7 @@ def add_character(user_id, char):
     cur = conn.cursor()
     item = cur.execute(f"SELECT * from characters WHERE user_id = {user_id}").fetchone()
     if item:
+        conn.close()
         return False
     
     [might, deft, grit, insight, aura] = char.stats
@@ -58,15 +59,38 @@ def add_character(user_id, char):
 def edit_name(user_id, old_name, new_name):
     conn = sqlite3.connect("breakrpg.db")
     cur = conn.cursor()
+    item = cur.execute(f"SELECT * from characters WHERE user_id = {user_id}").fetchone()
+    if not item:
+        conn.close()
+        return False
     cur.execute(f"""UPDATE characters SET char_name = '{new_name}'
                     WHERE user_id = {user_id} AND char_name = '{old_name}'""")
     conn.commit()
     conn.close()
     
-def level_up(user_id, char_name, stats, attack, hearts):
-    [might, deft, grit, insight, aura] = stats
+def get_char_rank(user_id, char_name):
     conn = sqlite3.connect("breakrpg.db")
     cur = conn.cursor()
+    item = cur.execute(f"SELECT calling, rank FROM characters WHERE user_id = {user_id} AND char_name = '{char_name}'").fetchone()
+    return item
+    
+def level_up(
+    user_id, 
+    char_name, 
+    might, 
+    deft, 
+    grit, 
+    insight, 
+    aura, 
+    attack, 
+    hearts
+):
+    conn = sqlite3.connect("breakrpg.db")
+    cur = conn.cursor()
+    item = cur.execute(f"SELECT * FROM characters WHERE user_id = {user_id} AND char_name = '{char_name}'")
+    if not item:
+        conn.close()
+        return False
     cur.execute(f"""UPDATE characters
                     SET might = {might}, deft = {deft}, grit = {grit},
                     insight = {insight}, aura = {aura}, attack = {attack},
@@ -74,4 +98,5 @@ def level_up(user_id, char_name, stats, attack, hearts):
                     WHERE user_id = {user_id} AND char_name = '{char_name}'""")
     conn.commit()
     conn.close()
+    return True
     

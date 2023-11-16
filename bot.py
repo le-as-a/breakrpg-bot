@@ -1,6 +1,7 @@
 import discord
 from discord.ext import tasks, commands
 from helper import char
+from protected import TOKEN_ID
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -25,3 +26,6 @@ async def create(
     print(character)
     
     
+    
+# ====    
+bot.run(TOKEN_ID)
