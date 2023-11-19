@@ -26,31 +26,31 @@ def add_character(user_id, char):
         conn.close()
         return False
     
-    [might, deft, grit, insight, aura] = char.stats
+    [might, deft, grit, insight, aura] = char['stats']
     defense = 10
-    if char.size == 'small':
+    if char['size'] == 'small':
         deft += 1
         might -= 1
         defense += 1
-    elif char.size =='large':
+    elif char['size'] =='large':
         might += 1
         defense -= 1
     cur.execute(f"""INSERT INTO characters VALUES (
                     {user_id},
-                    '{char.name}',
-                    '{char.calling}',
+                    '{char['name']}',
+                    '{char['calling']}',
                     1,
-                    '{char.species}',
-                    '{char.size}',
+                    '{char['species']}',
+                    '{char['size']}',
                     {might},
                     {deft},
                     {grit},
                     {insight},
                     {aura},
-                    {char.attack},
-                    {char.hearts},
-                    {defense}
-                    '{char.speed}'   
+                    {char['attack']},
+                    {char['hearts']},
+                    {defense},
+                    '{char['speed']}'   
                     )""")
     conn.commit()
     conn.close()

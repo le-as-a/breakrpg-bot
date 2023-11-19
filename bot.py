@@ -19,11 +19,13 @@ async def create(
     species: discord.Option(str, choices=['Human', 'Dimensional Stray', 'Chib', 'Tenebrate', 'Rai-Neko', 'Promethean', 'Gruun', 'Goblin', 'Dwarf', 'Elf', 'Bio-Mechanoid'])
 ):
     character = char.calling_info(calling)
-    character.size = char.species_info(species)
-    character.name = message.author.display_name
-    character.calling = calling
-    character.species = species
-    print(character)
+    character['size'] = char.species_info(species)
+    character['name'] = message.author.display_name
+    character['calling'] = calling
+    character['species'] = species
+    msg = char.new_character(message.author.id, character)
+    await message.respond(msg, ephemeral=True)
+
     
     
     

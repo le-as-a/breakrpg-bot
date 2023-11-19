@@ -11,30 +11,30 @@ def calling_info(calling):
     
     match calling:
         case 'Factotum':
-            info.stats = [7,9,8,9,9]
+            info['stats'] = [7,9,8,9,9]
         case 'Sneak':
-            info.stats = [7,10,7,10,8]
+            info['stats'] = [7,10,7,10,8]
         case 'Champion':
-            info.stats = [10, 8, 9, 7, 8]
-            info.attack = 1
-            info.hearts = 3
+            info['stats'] = [10, 8, 9, 7, 8]
+            info['attack'] = 1
+            info['hearts'] = 3
         case 'Raider':
-            info.stats = [9,9,9,8,7]
-            info.attack = 1
-            info.hearts = 3
-            info.speed = 'fast'
+            info['stats'] = [9,9,9,8,7]
+            info['attack'] = 1
+            info['hearts'] = 3
+            info['speed'] = 'fast'
         case 'Battle Princess':
-            info.stats = [8,8,9,7,10]
-            info.attack = 1
-            info.hearts = 3
+            info['stats'] = [8,8,9,7,10]
+            info['attack'] = 1
+            info['hearts'] = 3
         case 'Murder Princess':
-            info.stats = [8,7,10,8,9]
-            info.attack = 1
-            info.hearts = 3
+            info['stats'] = [8,7,10,8,9]
+            info['attack'] = 1
+            info['hearts'] = 3
         case 'Sage':
-            info.stats = [6,8,8,10,8]
+            info['stats'] = [6,8,8,10,8]
         case 'Heretic':
-            info.stats = [7,7,10,7,9]
+            info['stats'] = [7,7,10,7,9]
     return info
     
 def species_info(species):

@@ -11,6 +11,9 @@ table_schemas = [
     """ CREATE TABLE characters (
         user_id INTEGER NOT NULL,
         char_name VARCHAR(255),
+        calling VARCHAR(255),
+        rank INTEGER,
+        species VARCHAR(255),
         size VARCHAR(255),
         might INTEGER,
         deft INTEGER,
